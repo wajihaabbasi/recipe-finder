@@ -1,0 +1,14 @@
+# Dependency directories
+node_modules/
+
+# Environment variables (MUST be ignored)
+.env
+.env.local
+
+# Build output and logs
+dist/
+build/
+*.log
+
+# Operating System files
+.DS_Store
