@@ -1,9 +1,12 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
-const recipeRoutes = require('./routes/recipeRoutes');
 
 const app = express();
+
+const recipeRoutes = require('./routes/recipeRoutes');
+const userRoutes = require('./routes/userRoutes');
+
 
 // Middleware
 app.use(cors());
@@ -20,5 +23,8 @@ app.use('/api/recipes', recipeRoutes);
 app.get('/', (req, res) => {
   res.send('Recipe Finder API is live');
 });
+
+
+app.use('/api/users', userRoutes);
 
 module.exports = app;
