@@ -1,20 +1,16 @@
-// Load environment variables from .env file
-require('dotenv').config();
+const app = require('./src/app');
+const pool = require('./src/config/db');
 
-const express = require('express');
-const app = express();
-
-// Middleware to parse JSON bodies from incoming requests
-app.use(express.json());
-
-// Basic test route
-app.get('/', (req, res) => {
-    res.send('Recipe Finder Backend is running!');
-});
-
-// Define the port from environment variables or use 3000 as default
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
+// Test DB connection before starting server
+pool.query('SELECT NOW()', (err, res) => {
+  if (err) {
+    console.error('Database connection error:', err.stack);
+  } else {
+    console.log('Database Connected:', res.rows[0].now);
+    app.listen(PORT, () => {
+      console.log(` Server running on PORT: ${PORT}`);
+    });
+  }
 });
