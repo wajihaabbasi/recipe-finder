@@ -4,27 +4,27 @@ require('dotenv').config();
 
 const app = express();
 
-const recipeRoutes = require('./routes/recipeRoutes');
-const userRoutes = require('./routes/userRoutes');
+
 
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
-// Routes (We will add these soon)
 app.get('/', (req, res) => {
   res.send('Recipe Finder API is live');
 });
 
 //Use Recipe Route
+const recipeRoutes = require('./routes/recipeRoutes');
 app.use('/api/recipes', recipeRoutes);
 
-app.get('/', (req, res) => {
-  res.send('Recipe Finder API is live');
-});
-
-
+//
+const userRoutes = require('./routes/userRoutes');
 app.use('/api/users', userRoutes);
+
+//Adding Favourite 
+const favoriteRoutes = require('./routes/favoriteRoutes');
+app.use('/api/favorites', favoriteRoutes);
 
 module.exports = app;
