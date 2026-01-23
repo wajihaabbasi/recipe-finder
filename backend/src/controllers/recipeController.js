@@ -21,19 +21,34 @@ const searchRecipes = async (req, res) => {
     });
 
     res.json(response.data);
-  }  catch (error) {
-    // 1. ADD THIS: Log the detailed error from Spoonacular
-    if (error.response) {
-      console.error("Spoonacular API Error:", error.response.status, error.response.data);
-    } else {
-      console.error(" Network/Request Error:", error.message);
-    }
-    
-    res.status(500).json({ error: "Failed to fetch recipes" });
+  }  
+  catch (error) {
+        res.status(500).json({ 
+        error: "Failed to fetch recipes" 
+    });
   }
-// ...
+};
+
+//To fetch recipe details from spoonacular
+const getRecipeDetails = async (req,res) =>{
+    const { id } = req.params;
+  const apiKey = process.env.SPOONACULAR_API_KEY;
+
+  try {
+    const response = await axios.get(
+      `https://api.spoonacular.com/recipes/${id}/information`,
+      { params: { apiKey } }
+    );
+    res.json(response.data);
+  } catch (error) {
+    console.error("Spoonacular Detail Error:", error.message);
+    res.status(500).json({ 
+        error: "Failed to fetch recipe details" 
+    });
+  }
 };
 
 module.exports = {
-  searchRecipes
+  searchRecipes,
+  getRecipeDetails
 };

@@ -24,8 +24,8 @@ const registerUser = async (req, res) => {
     );
 
     res.status(201).json({ message: "User registered successfully", user: newUser.rows[0] });
-  } catch (err) {
-    console.error(err.message);
+  } catch (error) {
+    console.error(error.message);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
@@ -70,15 +70,44 @@ const loginUser = async (req, res) => {
       }
     });
 
-  } catch (err) {
+  } catch (error) {
     console.error(err.message);
     res.status(500).send("Internal Server Error");
   }
 };
 
+//logout User
 
+
+//delete user
+const deleteUser = async (req,res) =>{
+    const user_id = req.user;
+
+try {
+    const result = await pool.query(
+        'DELETE FROM users WHERE user_id = $1', [user_id]
+    );
+if (result.rowCount === 0){
+    return res.status(404).json ({
+        error: "User Not Found"
+    });
+}    
+
+res.json({
+    message:"User Account Deleted Successfully"
+});
+
+} catch (error) {
+    console.error(error.message);
+    res.status(500).json({
+        error: "Internal Server Error"
+    });
+    
+}    
+};
 
 module.exports = { 
     registerUser,
-    loginUser
+    loginUser,
+    deleteUser
  };

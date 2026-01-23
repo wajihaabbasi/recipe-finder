@@ -3,6 +3,8 @@ const router = express.Router();
 const recipeController = require('../controllers/recipeController');
 
 
+
 router.get('/search', recipeController.searchRecipes);
+router.get('/:id/information', recipeController.getRecipeDetails);
 
 module.exports = router;
