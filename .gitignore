@@ -1,9 +1,10 @@
 # Dependency directories
 node_modules/
 
-# Environment variables (MUST be ignored)
+# Environment variables 
 .env
 .env.local
+api.js
 
 # Build output and logs
 dist/

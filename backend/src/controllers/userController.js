@@ -60,7 +60,7 @@ const loginUser = async (req, res) => {
       { expiresIn: '1h' }      // Expiration
     );
 
-    res.json({
+    res.status(200).json({
       message: "Login successful",
       token,
       user: {
