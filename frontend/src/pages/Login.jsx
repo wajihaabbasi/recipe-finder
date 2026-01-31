@@ -2,7 +2,7 @@ import { useState, } from 'react';
 import { useRecipeContext } from "../context/RecipeContext";
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../services/api';
-import "../css/SignUp.css"
+import "../css/Login.css"
 
 
 const Login = () => {
@@ -24,20 +24,26 @@ const Login = () => {
         }
     };
 
+    
+
     return (
-        <div style={{ maxWidth: '400px', margin: '50px auto' }}>
-            <h2>Login to RecipeFinder</h2>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <form onSubmit={handleSubmit}>
+        <div className="auth-container">           
+            <form className= "login-form" onSubmit={handleSubmit}>
+               <h2>Login to RecipeFinder</h2>
+                {error && <p className="error-message" style={{color: 'red'}}>{error}</p>} 
                 <input 
-                    type="email" placeholder="Email" 
-                    value={email} onChange={(e) => setEmail(e.target.value)} 
+                    type="email" 
+                    placeholder="Email" 
+                    value={FormData.email} 
+                    onChange={(e) => setEmail(e.target.value)} 
                     required 
                 />
                 <br />
                 <input 
-                    type="password" placeholder="Password" 
-                    value={password} onChange={(e) => setPassword(e.target.value)} 
+                    type="password" 
+                    placeholder="Password" 
+                    value={FormData.password} 
+                    onChange={(e) => setPassword(e.target.value)} 
                     required 
                 />
                 <br />

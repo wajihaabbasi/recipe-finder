@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import getRecipes from "../services/api";
+import {getRecipes} from "../services/api";
 import RecipeCard from "../components/RecipeCard";
 import "../css/Home.css"
 
@@ -13,17 +13,13 @@ function Home() {
     useEffect(() => {
         loadRecipes();
     }, []);
-    /*setRecipes([
-        { id: 1, title: "Test Pizza", image: "https://via.placeholder.com/150", readyInMinutes: 20 }
-    ]);
-    setLoading(false);
-            }, []);*/
-
+    
     const loadRecipes = async (query) => {
         try {
             setLoading(true);
-            const results = await getRecipes(query);
-            setRecipes(results);
+            setError(null); //clear previous errors
+            const data = await getRecipes(query);
+            setRecipes(data);
         } catch (err) {
             console.error(err);
             setError("Failed to fetch recipes...");
@@ -42,6 +38,7 @@ function Home() {
 
     return (
         <div className="home">
+             
             <form onSubmit={handleSearch} className="search-form">
                 <input 
                     type="text" 

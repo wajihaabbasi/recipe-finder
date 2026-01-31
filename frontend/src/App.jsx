@@ -5,6 +5,7 @@ import Navbar from "./components/NavBar";
 import { RecipeProvider } from "./context/RecipeProvider";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import RecipeDetails from "./pages/RecipeDetails";
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
-          
+            <Route path="/recipe/:id/information" element={<RecipeDetails />} />
           </Routes>
         </main>
       </BrowserRouter>
@@ -26,3 +27,5 @@ function App() {
 }
 
 export default App;
+
+

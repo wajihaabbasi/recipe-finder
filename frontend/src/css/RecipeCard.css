@@ -53,3 +53,17 @@
     cursor: pointer;
 }
 
+.recipe-link {
+    text-decoration: none;
+    color: inherit;
+    display: block; /* Makes the link fill the card area */
+}
+
+.recipe-card {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.recipe-card:hover {
+    transform: translateY(-5px);
+}
