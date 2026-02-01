@@ -27,7 +27,7 @@ const Login = () => {
     
 
     return (
-        <div className="auth-container">           
+        <div className="auth-container" flex justify-center items-center min-h-screen>           
             <form className= "login-form" onSubmit={handleSubmit}>
                <h2>Login to RecipeFinder</h2>
                 {error && <p className="error-message" style={{color: 'red'}}>{error}</p>} 
@@ -54,8 +54,3 @@ const Login = () => {
 };
 
 export default Login;
-
-
-//import {loginUser} from "../services/api.js"
-//import { useRecipeContext } from '../context/RecipeContext.js';
-//import "../css/SignUp.css"
