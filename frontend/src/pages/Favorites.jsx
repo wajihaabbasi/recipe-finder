@@ -7,7 +7,7 @@ function Favorites() {
 
     if (favorites.length > 0) {
         return (
-            <div className="favorites">
+            <div className="p-8 w-full box-border">
                 <h2>Your Favorites</h2>
                 <div className="recipes-grid">
                     {favorites.map((recipe) => (

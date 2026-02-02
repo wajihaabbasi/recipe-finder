@@ -30,8 +30,8 @@ function Signup() {
     
 
     return (
-        <div className="bg-amber-950 flex justify-center items-center min-h-screen">
-            <form className="flex w-full max-w-100 flex-col gap-3.75 rounded-xl bg-[#5d2235] p-10 shadow-[0_10px_25px_rgba(0,0,0,0.35)]" onSubmit={handleSubmit}>
+        <div className="bg-green-200 flex justify-center items-center min-h-screen">
+            <form className="flex w-full max-w-100 flex-col gap-3.75 rounded-xl bg-[#052d1e] p-10 shadow-[0_10px_25px_rgba(0,0,0,0.35)]" onSubmit={handleSubmit}>
                 <h2 className="text-center mb-2">Create Account</h2>
                 {error && <p className="text-red-400 text-sm text-center font-medium bg-red-900/20 py-2 rounded">{error}</p>}
                 <input 
