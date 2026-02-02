@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import {getRecipes} from "../services/api";
 import RecipeCard from "../components/RecipeCard";
-import "../css/Home.css"
+//import "../css/Home.css"
 
 function Home() {
     const [searchQuery, setSearchQuery] = useState("");
     const [recipes, setRecipes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const searchInputClasses = "flex-1 p-3 rounded-lg bg-[#22312B] border border-primary/20 text-white outline-none focus:border-primary transition-all placeholder:text-gray-500";
 
     // This runs ONCE when the component mounts (starts up)
     useEffect(() => {
@@ -34,28 +35,37 @@ function Home() {
         loadRecipes(searchQuery);
     };
 
-    if (loading) return <div className="loading">Loading...</div>;
-
+    
     return (
-        <div className="home">
+        <div className="w-full py-4 md:py-8 min-h-screen bg-green-100">
              
-            <form onSubmit={handleSearch} className="search-form">
+            <form onSubmit={handleSearch} className="flex flex-row gap-3 max-w-150 mx-auto mb-6 md:mb-10 px-4">
                 <input 
                     type="text" 
                     placeholder="Search for recipes..." 
-                    className="search-input"
+                    className={searchInputClasses}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                <button type="submit" className="search-button">Search</button>
+                <button 
+                type="submit" 
+                className="px-6 py-3 bg-primary hover:bg-primary/90 text-white font-bold rounded-lg transition-all active:scale-95 shadow-lg whitespace-nowrap">
+                    Search
+                </button>
             </form>
 
-            {error && <div className="error-message">{error}</div>}
+            {error && (
+                <div className="max-w-150 mx-auto mb-6 px-4">
+            <div className="bg-red-900/20 text-red-400 p-3 rounded-lg border border-red-900/50 text-center">{error}</div>
+            </div>
+            )}
 
             {loading ? (
-                <div className="loading">Loading...</div>
+                <div className="flex justify-center items-center h-64 text-primary font-heading text-xl animate-pulse">
+                    Wait It's Loading ...
+                    </div>
             ) : (
-                <div className="recipes-grid">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 px-4 md:px-10 w-full max-w-350 mx-auto">
                     {Array.isArray(recipes) && recipes.map((recipe) => (
                         <RecipeCard recipe={recipe} key={recipe.id} />
                     ))}

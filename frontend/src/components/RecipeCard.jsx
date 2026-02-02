@@ -29,9 +29,18 @@ function RecipeCard({ recipe }) {
                     alt={recipe.title} 
                     className='h-full w-full object-cover'
                     />
-                    <div className="p-7 font-heading text-lg font-semibold line-clamp-2">
-                        <h3>{recipe.title}</h3>
-                     </div>
+                    <div className="p-5 flex flex-col space-y-2">
+                         <h3 className="font-heading text-lg md:text-xl font-bold  leading-tight tracking-tight group-hover:text-primary transition-colors line-clamp-2 min-h-[3.5rem]">
+                             {recipe.title}
+                            </h3>
+    
+    <div className="flex items-center gap-2 text-sm font-medium text-gray-400">
+        <span className="flex items-center gap-1">
+            <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            {recipe.readyInMinutes} mins
+        </span>
+    </div>
+</div>
                 </div>    
               <div className="absolute top-0 right-0 p-2.5 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                     <button 
