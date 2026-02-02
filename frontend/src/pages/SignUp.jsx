@@ -11,8 +11,7 @@ function Signup() {
     const navigate = useNavigate();
 
     const inputClasses = "w-full p-3 rounded-md border border-[#2E4A3F] bg-[#22312B] text-white outline-none focus:border-[#4ade80] transition-all placeholder:text-gray-500";
-    const buttonClasses = "w-full py-3 mt-2 bg-[#2E4A3F] hover:bg-[#3d6354] text-white font-semibold rounded-md transition-colors shadow-lg active:scale-[0.98]";
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
                 
@@ -58,12 +57,14 @@ function Signup() {
                     onChange={(e) => setFormData({...formData, password: e.target.value})}
                     required 
                 />
-                <button type="submit" className={buttonClasses}>
+                <button type="submit" className="bg-primary hover:bg-primary/80 text-white font-semibold mt-2 shadow-lg active:scale-95">
                     Sign Up
                     </button>
 
                 <p className="text-center text-gray-400 text-sm mt-2">
-                    Already have an account? <Link to="/login">Login here</Link>
+                    Already have an account? <Link to="/login" className="text-primary hover:underline font-medium">
+                    Login here
+                    </Link>
                     </p>
             </form>
         </div>

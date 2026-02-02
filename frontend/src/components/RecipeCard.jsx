@@ -1,4 +1,4 @@
-import '../css/RecipeCard.css';
+//import '../css/RecipeCard.css';
 import { useRecipeContext } from '../context/RecipeContext';
 import { Link, Navigate } from 'react-router-dom';
 
@@ -21,18 +21,21 @@ function RecipeCard({ recipe }) {
 
 
     return (
-         <div className="recipe-card">
+         <div className="group relative cursor-pointer overflow-hidden rounded-lg bg-secondary transition-transform duration-200 hover:-translate-y-1 shadow-lg">
             <Link to={`/recipe/${recipe.id}/information`} className="recipe-link">
-                <div className="recipe-poster">
-                    <img src={recipe.image} alt={recipe.title} />
-                    <div className="recipe-info">
+                <div className="relative aspect-6/4 w-full">
+                    <img 
+                    src={recipe.image}
+                    alt={recipe.title} 
+                    className='h-full w-full object-cover'
+                    />
+                    <div className="p-7 font-heading text-lg font-semibold line-clamp-2">
                         <h3>{recipe.title}</h3>
-                        <p>{recipe.readyInMinutes} mins</p>
-                    </div>
+                     </div>
                 </div>    
-              <div className="recipe-overlay">
+              <div className="absolute top-0 right-0 p-2.5 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                     <button 
-                        className={`favorite-btn ${favorite ? "active" : ""}`} 
+                        className={`flex h-8.75 w-8.75 items-center justify-center rounded-full bg-secondary shadow-md transition-transform hover:scale-110 active:scale-90 ${favorite ? "text-red-500" : "text-gray-400"}`}
                         onClick={onFavoriteClick}>
                         {favorite ? "❤️" : "🤍"}
                     </button>
