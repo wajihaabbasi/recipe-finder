@@ -76,7 +76,6 @@ const loginUser = async (req, res) => {
   }
 };
 
-//logout User
 
 
 //delete user
@@ -92,7 +91,6 @@ if (result.rowCount === 0){
         error: "User Not Found"
     });
 }    
-
 res.json({
     message:"User Account Deleted Successfully"
 });

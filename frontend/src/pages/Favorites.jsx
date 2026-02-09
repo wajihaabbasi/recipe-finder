@@ -8,20 +8,19 @@ function Favorites() {
         <div className="w-full p-8 box-border min-h-screen bg-slate-950">
             {favorites && favorites.length > 0 ? (
                 <>
-                    {/* Main Heading with Text Shadow */}
+                    {/* Page Main Heading */}
                     <h2 className="mb-8 text-center text-4xl md:text-5xl font-heading font-bold text-primary drop-shadow-[2px_2px_4px_rgba(0,0,0,0.3)]">
                         Your Favorites
                     </h2>
 
-                    
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-[1400px] mx-auto">
-                        {favorites.map((recipe, index) => (
-                            <div 
-                            key={recipe.id} 
-                            className="animate-fade-in"
-                            style={{animationDelay: `${index * 0.5}s`, fillMode: 'both'}}    
-                            >
-                                <RecipeCard recipe={recipe} />
+                       {favorites.map((recipe, index) => (
+                        <div 
+                        key={recipe.id} 
+                        className="animate-fade-in"
+                        style={{animationDelay: `${index * 0.5}s`, fillMode: 'both'}}    
+                        >
+                        <RecipeCard recipe={recipe} />
                             </div>
                         ))}
                     </div>

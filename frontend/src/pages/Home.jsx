@@ -10,7 +10,7 @@ function Home() {
     const [error, setError] = useState(null);
     const searchInputClasses = "flex-1 p-3 rounded-lg bg-[#22312B] border border-primary/20 text-white outline-none focus:border-primary transition-all placeholder:text-gray-500";
 
-    // This runs ONCE when the component mounts (starts up)
+    // This runs once  when the component mounts (starts up)
     useEffect(() => {
         loadRecipes();
     }, []);
@@ -28,7 +28,7 @@ function Home() {
             setLoading(false);
         }
     };
-
+ //Process search from submitted query
     const handleSearch = (e) => {
         e.preventDefault();
         if (!searchQuery.trim()) return;
@@ -38,7 +38,7 @@ function Home() {
     
     return (
         <div className="w-full py-4 md:py-8 min-h-screen">
-             
+             {/*Search Bar*/}
             <form onSubmit={handleSearch} className="flex flex-row gap-3 max-w-150 mx-auto mb-6 md:mb-10 px-4">
                 <input 
                     type="text" 
@@ -47,6 +47,7 @@ function Home() {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
+                {/*Search Button*/}
                 <button 
                 type="submit" 
                 className="px-6 py-3 bg-primary hover:bg-secondary/90 hover:text-accent text-white font-bold rounded-lg transition-all active:scale-95 shadow-lg whitespace-nowrap">
@@ -59,7 +60,7 @@ function Home() {
             <div className="bg-red-900/20 text-red-400 p-3 rounded-lg border border-red-900/50 text-center">{error}</div>
             </div>
             )}
-
+            {/*When Fetching Recipes */}
             {loading ? (
                 <div className="flex justify-center items-center h-64 text-primary font-heading text-xl animate-pulse">
                     Wait It's Loading ...

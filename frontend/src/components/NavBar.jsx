@@ -1,56 +1,120 @@
 import { Link } from "react-router-dom";
 import { useRecipeContext } from "../context/RecipeContext";
-import {useState} from "react";
+import { useState } from "react";
 import AuthModal from "./Auth";
 
-
+/**
+ * Navbar Component
+ * Handles navigation links, authentication modal triggers, and user profile dropdown.
+ */
 const Navbar = () => {
-const { user, logout } = useRecipeContext(); //Get user and logout form context
-const [isModalOpen, setIsModalOpen] = useState(false);  //for auth modal for signup/login
+    const { user, logout } = useRecipeContext(); 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-return (
-        <nav className="flex items-center justify-between bg-primary px-4 py-4 text-white shadow-md md:px-8">
-            <div className="font-heading text-xl font-bold md:text-2xl">
-                <Link to="/">RecipeFinder</Link>
+    /**
+     * Placeholder for account deletion logic
+     * Should be connected to an API service in production
+     */
+    const handleDeleteAccount = () => {
+        if (window.confirm("Are you sure you want to delete your account? This action is permanent.")) {
+            // Add API call here
+            console.log("Account deleted for user:", user?.id);
+            logout();
+        }
+    };
+
+    return (
+        <nav className="flex items-center justify-between bg-primary px-4 py-4 text-white shadow-lg md:px-8 border-b border-white/5">
+            {/* Logo Section */}
+            <div className="font-heading text-xl font-bold tracking-tight md:text-2xl">
+                <Link to="/" className="transition-colors hover:text-accent">
+                    RecipeFinder
+                </Link>
             </div>
 
-            <div className="flex gap-4 md:gap-8 items-center text-sm md:text-base">
-                <Link to="/" className="rounded px-2 py-2 text-base font-bold transition-colors duration-200 hover:text-accent hover:bg-white/10 md:px-4">Home</Link>
-                <Link to="/favorites" className="rounded px-2 py-2 text-base font-bold transition-colors duration-200 hover:text-accent hover:bg-white/10 md:px-4">Favorites</Link>
-                
+            {/* Main Navigation Links */}
+            <div className="flex items-center gap-4 md:gap-10">
+            <div className="flex gap-2 md:gap-5 items-center">
+                <Link 
+                    to="/" 
+                    className="font-heading rounded-lg px-3 py-2 text-sm font-bold transition-all duration-200 hover:text-primary hover:bg-accent md:text-base"
+                >
+                    Home
+                </Link>
+                <Link 
+                    to="/favorites" 
+                    className="font-heading rounded-lg px-3 py-2 text-sm font-bold transition-all duration-200 hover:text-primary hover:bg-accent md:text-base"
+                >
+                    Favorites
+                </Link>
+            </div>
+
+            {/* Authentication & User Dropdown */}
+            <div className="flex items-center">
                 {user ? (
-                    /* Show this when Logged In */
-                    <div className="flex items-center gap-4">
-                        <span className="hidden md:block text-white/90 italic">
-                            Hi, {user.username}
-                        </span>
+                    <div className="relative">
+                        {/* Profile Trigger Button */}
                         <button 
-                            onClick={logout} // Directly calls logout
-                            className="rounded px-2 py-2 text-base font-bold transition-colors duration-200 hover:text-accent hover:bg-white/10 md:px-4"
+                            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                            className="flex items-center gap-2 bg-white/5 hover:bg-white/10 px-4 py-2 rounded-lg transition-all border border-white/10 group"
                         >
-                            Logout
+                            <span className="font-medium text-sm md:text-base">Hi, {user.username}</span>
+                            <span className={`transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''} text-accent`}>
+                                ▾
+                            </span>
                         </button>
+
+                        {/* Dropdown Menu */}
+                        {isDropdownOpen && (
+                            <>
+                                {/* Click-away overlay */}
+                                <div 
+                                    className="fixed inset-0 z-10" 
+                                    onClick={() => setIsDropdownOpen(false)}
+                                ></div>
+
+                                <div className="absolute right-0 mt-3 w-52 rounded-xl bg-primary border border-white/10 shadow-2xl z-20 overflow-hidden animate-fade-in ring-1 ring-black/5">
+                                    <div className="px-4 py-3 border-b border-white/5">
+                                        <p className="text-xs text-gray-400 uppercase tracking-widest font-bold">Account</p>
+                                    </div>
+                                    
+                                    <button 
+                                        onClick={() => { logout(); setIsDropdownOpen(false); }}
+                                        className="w-full text-left px-4 py-3 text-sm font-heading hover:bg-white/5 hover:text-accent transition-colors"
+                                    >
+                                        Logout
+                                    </button>
+                                    
+                                    <button 
+                                        onClick={() => { handleDeleteAccount(); setIsDropdownOpen(false); }}
+                                        className="w-full text-left px-4 py-3 text-sm text-red-400 hover:bg-red-500/10 transition-colors font-medium"
+                                    >
+                                        Delete Account
+                                    </button>
+                                </div>
+                            </>
+                        )}
                     </div>
                 ) : (
-                    /* Show this when Logged Out */
+                    /* Guest Action Button */
                     <button 
-                        onClick={() => setIsModalOpen(true)}
-                        className="rounded-lg px-4 py-2 font-bold transition-colors duration-200 hover:text-accent hover:bg-white/10 md:px-4"
+                        onClick={() => setIsModalOpen(true)} 
+                        className="font-heading bg-accent text-primary px-5 py-2 rounded-lg font-bold shadow-md hover:scale-105 active:scale-95 transition-all duration-200"
                     >
-                        Login or SignUp
+                        Join Now
                     </button>
                 )}
             </div>
 
+            {/* Modular Auth Popup */}
             <AuthModal 
                 isOpen={isModalOpen} 
                 onClose={() => setIsModalOpen(false)} 
             />
+            </div>
         </nav>
     );
 };
 
 export default Navbar;
-
-//"rounded px-2 py-2 text-base transition-colors duration-200 hover:text-accent hover:bg-white/10 md:px-4">Favorites</Link>
-//"bg-white text-primary px-4 py-2 rounded-lg font-bold hover:bg-white/90 transition-all active:scale-95

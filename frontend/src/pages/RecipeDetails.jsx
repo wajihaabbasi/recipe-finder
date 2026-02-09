@@ -12,16 +12,15 @@ function RecipeDetails() {
    const favorite = recipe ? isFavorite(recipe.id) : false; // only checks for recipe if recipe exists
 
     const onFavoriteClick = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
+        e.preventDefault(); //Stop the browser from following a link
+        e.stopPropagation(); //prevents clicking the heart from opening the whole recipe card 
         if(!user){
             alert("Login or Register Now To Save Your Favorite Recipes");
-           setModalOpen(true); // Open the popup instead of navigating away!
+           setModalOpen(true); // Open the popup 
         return;
         }
-
-        if (favorite) removeFromFavorites(recipe.id);
-        else addToFavorites(recipe);
+        if (favorite) removeFromFavorites(recipe.id); //if recipe was already favorite, it undos it
+        else addToFavorites(recipe); //else adds it
     }
 
     useEffect(() => {
@@ -38,15 +37,14 @@ function RecipeDetails() {
         loadDetails();
     }, [id]);
 
-    //Error-Console Messages
-
-    //
+    //Error-Console Messages:
+    //Display when fetching a recipe
    if (loading) return (
         <div className="flex justify-center items-center h-screen text-primary font-heading animate-pulse">
             Gathering ingredients...
         </div>
     );
-
+    //Display if there was an error displaying recipe
     if (!recipe) return (
         <div className="flex justify-center items-center h-screen text-red-500 font-heading">
             Recipe Not Found :/
@@ -55,7 +53,7 @@ function RecipeDetails() {
 
     return (
         <div className="max-w-200 mx-auto my-10 p-5 md:p-10 bg-primary rounded-xl shadow-xl animate-fade-in">
-        {/* Floating Favorite Button */}
+        {/*Favorite Button */}
         <div className="absolute top-8 right-8 z-10">
             <button 
                 onClick={onFavoriteClick}

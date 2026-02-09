@@ -1,5 +1,6 @@
 const { body } = require('express-validator');
 
+//rules for credentials to be valid
 const registerRules = [
     body('username')
         .trim()
