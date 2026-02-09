@@ -1,6 +1,5 @@
 import { useRecipeContext } from "../context/RecipeContext";
 import RecipeCard from "../components/RecipeCard";
-//import "../css/Favorites.css";
 
 function Favorites() {
     const { favorites } = useRecipeContext();

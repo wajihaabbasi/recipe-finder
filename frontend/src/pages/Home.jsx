@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import {getRecipes} from "../services/api";
 import RecipeCard from "../components/RecipeCard";
-//import "../css/Home.css"
+
 
 function Home() {
     const [searchQuery, setSearchQuery] = useState("");
@@ -37,7 +37,7 @@ function Home() {
 
     
     return (
-        <div className="w-full py-4 md:py-8 min-h-screen bg-green-100">
+        <div className="w-full py-4 md:py-8 min-h-screen">
              
             <form onSubmit={handleSearch} className="flex flex-row gap-3 max-w-150 mx-auto mb-6 md:mb-10 px-4">
                 <input 
@@ -49,7 +49,7 @@ function Home() {
                 />
                 <button 
                 type="submit" 
-                className="px-6 py-3 bg-primary hover:bg-primary/90 text-white font-bold rounded-lg transition-all active:scale-95 shadow-lg whitespace-nowrap">
+                className="px-6 py-3 bg-primary hover:bg-secondary/90 hover:text-accent text-white font-bold rounded-lg transition-all active:scale-95 shadow-lg whitespace-nowrap">
                     Search
                 </button>
             </form>

@@ -8,7 +8,7 @@ import SignUp from "./pages/SignUp";
 import RecipeDetails from "./pages/RecipeDetails";
 
 function App() {
-  return (
+    return (
     <RecipeProvider>
       <BrowserRouter>
         <Navbar />

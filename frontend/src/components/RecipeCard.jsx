@@ -1,4 +1,3 @@
-//import '../css/RecipeCard.css';
 import { useRecipeContext } from '../context/RecipeContext';
 import { Link, Navigate } from 'react-router-dom';
 
@@ -30,7 +29,7 @@ function RecipeCard({ recipe }) {
                     className='h-full w-full object-cover'
                     />
                     <div className="p-5 flex flex-col space-y-2">
-                         <h3 className="font-heading text-lg md:text-xl font-bold  leading-tight tracking-tight group-hover:text-primary transition-colors line-clamp-2 min-h-[3.5rem]">
+                         <h3 className="font-heading text-lg md:text-xl font-bold text-primary leading-tight tracking-tight group-hover:text-accent transition-colors line-clamp-2 min-h-[3.5rem]">
                              {recipe.title}
                             </h3>
     
