@@ -1,11 +1,12 @@
 import { useRecipeContext } from "../context/RecipeContext";
 import RecipeCard from "../components/RecipeCard";
+import { Link } from "react-router-dom";
 
 function Favorites() {
     const { favorites } = useRecipeContext();
 
      return (
-        <div className="w-full p-8 box-border min-h-screen bg-slate-950">
+        <div className="w-full p-8 box-border min-h-screen bg-white">
             {favorites && favorites.length > 0 ? (
                 <>
                     {/* Page Main Heading */}
@@ -13,7 +14,7 @@ function Favorites() {
                         Your Favorites
                     </h2>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-[1400px] mx-auto">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-350 mx-auto">
                        {favorites.map((recipe, index) => (
                         <div 
                         key={recipe.id} 
@@ -27,7 +28,7 @@ function Favorites() {
                 </>
             ) : (
                 /* Empty State Section */
-                <div className="text-center py-16 px-8 bg-white/5 rounded-xl mt-8 mb-8 max-w-[600px] mx-auto border border-white/10 animate-fade-in">
+                <div className="text-center py-16 px-8 bg-white/5 rounded-xl mt-8 mb-8 max-w-150 mx-auto border border-white/10 animate-fade-in">
                     
                     <h2 className="mb-4 text-3xl font-heading font-bold text-primary">
                         No Favorites Yet

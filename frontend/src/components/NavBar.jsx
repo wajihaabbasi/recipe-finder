@@ -1,8 +1,8 @@
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useRecipeContext } from "../context/RecipeContext";
 import { useState } from "react";
 import AuthModal from "./Auth";
-import { deleteUserAccount } from '../services/api';
+
 
 
 /**
@@ -10,25 +10,11 @@ import { deleteUserAccount } from '../services/api';
  * Handles navigation links, authentication modal triggers, and user profile dropdown.
  */
 const Navbar = () => {
-    const navigate = useNavigate();
     const { user, logout} = useRecipeContext(); 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-    /**
-     Delete Account Logic
-     */
-    const handleDeleteAccount = async () => {
-    if (!window.confirm("Delete account?")) return;
-
-    try {
-        await deleteUserAccount(); // The helper handles the token and URL
-        logout();
-        navigate("/signup");
-    } catch (err) {
-        alert(err.message);
-    }
-};
+    
     return (
         <nav className="flex items-center justify-between bg-primary px-4 py-4 text-white shadow-lg md:px-8 border-b border-white/5">
             {/* Logo Section */}
@@ -47,8 +33,7 @@ const Navbar = () => {
                 >
                     Home
                 </Link>
-                <Link 
-                    to="/favorites" 
+                <Link to="/favorites" 
                     className="font-heading rounded-lg px-3 py-2 text-sm font-bold transition-all duration-200 hover:text-primary hover:bg-accent md:text-base"
                 >
                     Favorites
@@ -91,12 +76,6 @@ const Navbar = () => {
                                         Logout
                                     </button>
                                     
-                                    <button 
-                                        onClick={() => { handleDeleteAccount(); setIsDropdownOpen(false); }}
-                                        className="w-full text-left px-4 py-3 text-sm text-red-400 hover:bg-red-500/10 transition-colors font-medium"
-                                    >
-                                        Delete Account
-                                    </button>
                                 </div>
                             </>
                         )}

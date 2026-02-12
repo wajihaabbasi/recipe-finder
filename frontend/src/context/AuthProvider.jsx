@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { AuthContext } from './AuthContext';
-import { deleteUserAccount } from '../services/api';
 
 /**
  * The Provider is a wrapper component. 
@@ -20,19 +19,9 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
     };
 
-    const removeAccount = async () => {
-      const token = localStorage.getItem("token");
-      try{
-        await deleteUserAccount(token);
-            logout(); // Clean up state after successful API delete
-            return { success: true };
-        } catch (error) {
-            return { success: false, message: error.message };
-      }
-      
-    };
+   
   return (
-    <AuthContext.Provider value={{user, login, logout, removeAccount}}>
+    <AuthContext.Provider value={{user, login, logout}}>
       {children}
     </AuthContext.Provider>
   );
