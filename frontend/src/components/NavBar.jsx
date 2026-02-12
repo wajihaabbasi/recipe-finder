@@ -1,29 +1,34 @@
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useRecipeContext } from "../context/RecipeContext";
 import { useState } from "react";
 import AuthModal from "./Auth";
+import { deleteUserAccount } from '../services/api';
+
 
 /**
  * Navbar Component
  * Handles navigation links, authentication modal triggers, and user profile dropdown.
  */
 const Navbar = () => {
-    const { user, logout } = useRecipeContext(); 
+    const navigate = useNavigate();
+    const { user, logout} = useRecipeContext(); 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     /**
-     * Placeholder for account deletion logic
-     * Should be connected to an API service in production
+     Delete Account Logic
      */
-    const handleDeleteAccount = () => {
-        if (window.confirm("Are you sure you want to delete your account? This action is permanent.")) {
-            // Add API call here
-            console.log("Account deleted for user:", user?.id);
-            logout();
-        }
-    };
+    const handleDeleteAccount = async () => {
+    if (!window.confirm("Delete account?")) return;
 
+    try {
+        await deleteUserAccount(); // The helper handles the token and URL
+        logout();
+        navigate("/signup");
+    } catch (err) {
+        alert(err.message);
+    }
+};
     return (
         <nav className="flex items-center justify-between bg-primary px-4 py-4 text-white shadow-lg md:px-8 border-b border-white/5">
             {/* Logo Section */}

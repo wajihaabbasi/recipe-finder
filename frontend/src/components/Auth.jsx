@@ -1,5 +1,4 @@
 //Login and SignUp modal component
-
 import { useState } from "react";
 import { signupUser, loginUser } from "../services/api";
 import { useRecipeContext } from "../context/RecipeContext";

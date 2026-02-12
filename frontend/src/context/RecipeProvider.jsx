@@ -8,6 +8,7 @@ export const RecipeProvider = ({ children }) => {
         const token = localStorage.getItem("token");
         return (savedUser && token) ? JSON.parse(savedUser) : null;
     });
+    const [userToken, setToken] = useState(() => localStorage.getItem("token") || null);
 
     //  Lazy Initialize Favorites
     const [favorites, setFavorites] = useState(() => {
@@ -15,17 +16,21 @@ export const RecipeProvider = ({ children }) => {
         return storedFavs ? JSON.parse(storedFavs) : [];
     });
 
-    const login = (userData, token) => {
+    const login = (userData, userToken) => {
         setUser(userData);
+        setToken(userToken);
         localStorage.setItem("user", JSON.stringify(userData));
-        localStorage.setItem("token", token);
+        localStorage.setItem("token", userToken);
     };
 
     const logout = () => {
         setUser(null);
+        setToken(null);
         localStorage.removeItem("user");
         localStorage.removeItem("token");
     };
+
+    
 
     // Effect to keep localStorage in sync when favorites change
     useEffect(() => {
@@ -47,6 +52,7 @@ export const RecipeProvider = ({ children }) => {
     
     const value = {
         user, 
+        userToken,
         login,
         logout,
         favorites,
