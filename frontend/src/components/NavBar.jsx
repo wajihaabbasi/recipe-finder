@@ -3,18 +3,14 @@ import { useRecipeContext } from "../context/RecipeContext";
 import { useState } from "react";
 import AuthModal from "./Auth";
 
-
-
 /**
  * Navbar Component
  * Handles navigation links, authentication modal triggers, and user profile dropdown.
  */
 const Navbar = () => {
-    const { user, logout} = useRecipeContext(); 
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const { user, logout, isAuthModalOpen, setIsAuthModalOpen} = useRecipeContext(); 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-    
     return (
         <nav className="flex items-center justify-between bg-primary px-4 py-4 text-white shadow-lg md:px-8 border-b border-white/5">
             {/* Logo Section */}
@@ -29,8 +25,7 @@ const Navbar = () => {
             <div className="flex gap-2 md:gap-5 items-center">
                 <Link 
                     to="/" 
-                    className="font-heading rounded-lg px-3 py-2 text-sm font-bold transition-all duration-200 hover:text-primary hover:bg-accent md:text-base"
-                >
+                    className="font-heading rounded-lg px-3 py-2 text-sm font-bold transition-all duration-200 hover:text-primary hover:bg-accent md:text-base">
                     Home
                 </Link>
                 <Link to="/favorites" 
@@ -83,7 +78,7 @@ const Navbar = () => {
                 ) : (
                     /* Guest Action Button */
                     <button 
-                        onClick={() => setIsModalOpen(true)} 
+                        onClick={() => setIsAuthModalOpen(true)} 
                         className="font-heading bg-accent text-primary px-5 py-2 rounded-lg font-bold shadow-md hover:scale-105 active:scale-95 transition-all duration-200"
                     >
                         Join Now
@@ -93,8 +88,8 @@ const Navbar = () => {
 
             {/* Modular Auth Popup */}
             <AuthModal 
-                isOpen={isModalOpen} 
-                onClose={() => setIsModalOpen(false)} 
+                isOpen={isAuthModalOpen} 
+                onClose={() => setIsAuthModalOpen(false)} 
             />
             </div>
         </nav>

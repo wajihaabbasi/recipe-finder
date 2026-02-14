@@ -12,8 +12,9 @@ export const RecipeProvider = ({ children }) => {
 
     //  Lazy Initialize Favorites
     const [favorites, setFavorites] = useState(() => {
+        const token = localStorage.getItem("token");
         const storedFavs = localStorage.getItem("favorites");
-        return storedFavs ? JSON.parse(storedFavs) : [];
+        return (token && storedFavs) ? JSON.parse(storedFavs) : [];
     });
 
     const login = (userData, userToken) => {
@@ -26,8 +27,10 @@ export const RecipeProvider = ({ children }) => {
     const logout = () => {
         setUser(null);
         setToken(null);
+        setFavorites([]); //to clear the fav UI state
         localStorage.removeItem("user");
         localStorage.removeItem("token");
+        localStorage.removeItem("favorites"); //remove saved recipes from browser
     };
 
     
@@ -48,7 +51,7 @@ export const RecipeProvider = ({ children }) => {
     const isFavorite = (recipeId) => {
         return favorites.some((recipe) => recipe.id === recipeId);
     };
-
+    const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
     
     const value = {
         user, 
@@ -58,7 +61,9 @@ export const RecipeProvider = ({ children }) => {
         favorites,
         addToFavorites,
         removeFromFavorites,
-        isFavorite
+        isFavorite,
+        isAuthModalOpen,
+        setIsAuthModalOpen
     };
 
     return (
