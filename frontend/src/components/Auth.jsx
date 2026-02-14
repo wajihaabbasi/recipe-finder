@@ -4,18 +4,20 @@ import { signupUser, loginUser } from "../services/api";
 import { useRecipeContext } from "../context/RecipeContext";
 
 const AuthModal = ({ isOpen, onClose }) => {
-    //  Context & State
+    //  Access global login function from Context
     const { login } = useRecipeContext();
+    //UI state
     const [isLoginMode, setIsLoginMode] = useState(true);
     const [error, setError] = useState("");
     const [formData, setFormData] = useState({ username: "", email: "", password: "" });
 
+    // Conditional render: If modal isn't triggered, don't mount to DOM
     if (!isOpen) return null;
 
     // Merged Submit Logic
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError(""); // Clear previous errors
+        setError(""); // Clear previous UI error states
 
         try {
             if (isLoginMode) {
@@ -40,19 +42,20 @@ const AuthModal = ({ isOpen, onClose }) => {
                 }
             }
 
-            onClose(); // Close modal on success
+            onClose(); // Exit modal on success
         } catch (err) {
+            // Error handling: prioritizes backend messages over generic ones
             setError(err.response?.data?.error || err.message || "Action failed");
         }
     };
 
 
 //Auth diaglog box component   
-    const inputClasses = "w-full p-3 rounded-lg bg-[#22312B] border border-primary/20 text-white outline-none focus:border-primary transition-all placeholder:text-gray-500";
+    const inputClasses = "w-full p-3 rounded-lg bg-secondary/50 border border-primary/20 text-white outline-none focus:border-primary transition-all placeholder:text-gray-500 font-mono";
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            {/* Backdrop */}
+            {/* Backdrop: darkens background */}
             <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose}></div>
 
             {/* Modal Card */}
@@ -66,7 +69,7 @@ const AuthModal = ({ isOpen, onClose }) => {
                     {isLoginMode ? "Login to RecipeFinder" : "Create Account"}
                 </h2>
 
-                {error && <p className="text-red-400 text-sm text-center font-medium bg-red-900/20 py-2 rounded">{error}</p>}
+                {error && <p className="text-white text-sm text-center font-medium bg-accent/30 py-2 rounded border border-accent/50">{error}</p>}
 
                 {!isLoginMode && (
                     <input 
@@ -96,11 +99,12 @@ const AuthModal = ({ isOpen, onClose }) => {
                     onChange={(e) => setFormData({...formData, password: e.target.value})}
                     required 
                 />
-
+                {/* Submit Button*/}
                 <button type="submit" className="bg-primary hover:bg-primary/80 text-white font-semibold py-3 rounded-lg mt-2 shadow-lg active:scale-95 transition-all">
                     {isLoginMode ? "Login" : "Sign Up"}
                 </button>
 
+                {/* Mode Toggle Link */}
                 <p className="text-center text-gray-400 text-sm mt-2">
                     {isLoginMode ? "Don't have an account?" : "Already have an account?"} 
                     <button 

@@ -17,7 +17,8 @@ function Favorites() {
                     <p className="text-gray-500 text-lg leading-relaxed mb-8">
                         Sign in to save your favorite recipes, and sync them across all your devices.
                     </p>
-
+                    
+                    {/* Modal Button*/}
                     <button 
                         onClick={() => setIsAuthModalOpen(true)}
                         className="px-10 py-4 bg-primary text-white rounded-xl font-bold text-lg hover:scale-105 active:scale-95 transition-all shadow-lg">
@@ -53,7 +54,8 @@ function Favorites() {
                     <p className="text-gray-400 text-lg leading-relaxed">
                         Start exploring recipes and heart your favorites to see them show up here!
                     </p>
-                    <Link 
+                    {/* Navigation to home page*/}
+                    <Link  
                         to="/" 
                         className="inline-block mt-6 px-6 py-2 bg-primary text-white rounded-lg font-bold hover:bg-primary/80 transition-colors"
                     >

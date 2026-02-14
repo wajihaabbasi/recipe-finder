@@ -25,7 +25,7 @@ function RecipeCard({ recipe }) {
 
     return (
          <div className="group relative cursor-pointer overflow-hidden rounded-lg bg-secondary transition-transform duration-200 hover:-translate-y-1 shadow-lg">
-            <Link to={`/recipe/${recipe.id}/information`} className="recipe-link">
+            <Link to={`/recipe/${recipe.id}/information`} className="recipe-link"> {/* Fetches the recipe details when clicked on the card*/}
                 <div className="relative aspect-6/4 w-full">
                  {/*Recipe Image*/}
                     <img 
