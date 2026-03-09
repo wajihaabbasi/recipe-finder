@@ -8,7 +8,7 @@ This project was developed as part of the **DLBCSPJWD01: Project Java and Web De
 * **Target Audience**: Home cooks, busy professionals, and culinary enthusiasts.
 * **Responsive Design**: Optimized for desktop, tablet, and smartphone viewports.
 
-##  Technology Stack (Final Choices) 
+##  Technology Stack 
 * **Frontend**: React.js (Vite), Tailwind CSS v4, React Router Dom.
 * **Backend**: Node.js, Express.js.
 * **Database**: PostgreSQL for persistent user and favorites storage.
@@ -40,3 +40,16 @@ CREATE TABLE favorites (
     recipe_title VARCHAR(255),
     recipe_image TEXT
 );
+
+```
+### 3. Clone the Repository
+
+Open a terminal and run:
+
+```bash
+git clone https://github.com/wajihaabbasi/recipe-finder.git
+```
+
+    DB_NAME=recipe_finder
+    JWT_SECRET=your_secure_secret_key
+    SPOONACULAR_API_KEY=your_spoonacular_key
