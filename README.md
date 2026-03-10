@@ -1,4 +1,4 @@
-# RecipeFinder - Full-Stack Recipe Discovery Platform 
+# RecipeFinder - Recipe Discovery Platform 
 
 RecipeFinder is a responsive web application that allows users to search for recipes, manage a personal "Favorites" library, and handle secure authentication.<br> 
 This project was developed as part of the **DLBCSPJWD01: Project Java and Web Development** portfolio.
