@@ -1,6 +1,6 @@
-# RecipeFinder - Recipe Discovery Platform 
+# <img width="50" height="50" alt="image" src="https://github.com/user-attachments/assets/15bd438e-e42f-47d4-abdb-279c13f88305" /> Recipe Finder - Recipe Discovery Platform 
 
-RecipeFinder is a responsive web application that allows users to search for recipes, manage a personal "Favorites" library, and handle secure authentication.<br> 
+Recipe Finder is a responsive web application that allows users to search for recipes, manage a personal "Favorites" library, and handle secure authentication.<br> 
 This project was developed as part of the **DLBCSPJWD01: Project Java and Web Development** portfolio.
 
 ## Project Overview
@@ -8,12 +8,23 @@ This project was developed as part of the **DLBCSPJWD01: Project Java and Web De
 * **Target Audience**: Home cooks, busy professionals, and culinary enthusiasts.
 * **Responsive Design**: Optimized for desktop, tablet, and smartphone viewports.
 
-##  Technology Stack 
+  
+
+## Technology Stack 
 * **Frontend**: React.js (Vite), Tailwind CSS v4, React Router Dom.
 * **Backend**: Node.js, Express.js.
 * **Database**: PostgreSQL for persistent user and favorites storage.
 * **Authentication**: JSON Web Tokens (JWT) for secure session management.
 * **External API**: Spoonacular API
+
+## User Permissions & Access Control
+
+To ensure a balance between accessibility and security, the application follows these access rules:
+
+* **Guest Users**: Can search for recipes and view full ingredients/instructions.
+* **Authenticated Users**: Can access their "Favorites" library and save/remove recipes.
+* **Logic**: If a guest attempts to favorite a recipe, the application will prompt them to log in. This is managed via the `AuthContext` on the frontend and verified by `authMiddleware.js` on the backend.
+
 
 ---
 
@@ -78,9 +89,13 @@ cp .env.example .env
 ```
 3. Open the .env file and replace the placeholders with your actual credentials:
 
-    **DB_USER / DB_PASSWORD**: Your local PostgreSQL username and password.
+    **PGUSER / PGPASSWORD**: Your local PostgreSQL username and password.
 
-    **SPOONACULAR_API_KEY**: Your key from the Spoonacular dashboard / The key provided in the pptx first side 
+    **PGDATABASE/PGHOST**: What you had selected when setting the database or copy paste from the schema details.
+
+    **PORT**: 3000 or any other of your choice 
+
+    **SPOONACULAR_API_KEY**: Your key from the Spoonacular dashboard / The key provided in the pptx first side .
 
     **JWT_SECRET**: A random string for session security.    
 
@@ -103,7 +118,7 @@ npm run dev
 Vite will start a local development server and provide a **local host URL** like:
 http://localhost:5173/
 
-Copy and paste this in your browser
+Copy and paste from your terminal into your browser.
 
 ---
 
@@ -111,20 +126,21 @@ Copy and paste this in your browser
 
 * **Port 3000 or 5173 is in use**: If you get an `EADDRINUSE` error, ensure no other project is running. You can change the port in the `.env` (backend) or `vite.config.js` (frontend).
 * **Database Connection Failed**: Double-check that the PostgreSQL service is running and that your `DB_USER` and `DB_PASSWORD` in the `.env` match your local setup.
-* **API Results not appearing**: Check the backend terminal for a `402` error. This indicates the Spoonacular daily quota has been reached. In this case, use the provided mock data logic for testing.
+* **API Results not appearing**: Check the backend terminal for a `402` error. This indicates the Spoonacular daily quota has been reached for the day. 
 * **CORS Errors**: Ensure the frontend is running on the expected port (5173), as the backend is configured to allow requests from that specific origin.
 
 ---
 
 ##  Manual Test Cases
 
-As per the project requirements, the following test cases verify the core functionality and responsiveness:
+The following test cases verify the core functionality and responsiveness:
 
 | Test ID | Feature | Action | Expected Result |
 | :--- | :--- | :--- | :--- |
-| TC-01 | **Search** | Enter "Pasta" in search bar | Backend proxies request; results grid displays 10+ recipes. |
+| TC-01 | **Search** | Enter "Pasta" in search bar | Backend proxies request; results grid displays recipes. |
 | TC-02 | **Auth** | Register a new user | User is saved in PostgreSQL; JWT is stored in LocalStorage. |
-| TC-03 | **Persistence** | Click "Favorite" on a recipe | Recipe ID and metadata are saved to the DB for that specific user. |
-| TC-04 | **Security** | Access `/favorites` while logged out | App redirects to login or hides protected content. |
-| TC-05 | **Responsive** | Resize browser to 375px (Mobile) | Layout shifts to a single column; text remains readable. |
-| TC-06 | **Logout** | Click "Logout" button | JWT is cleared; "Favorites" state is reset to empty. |
+| TC-03 | **Auth** | Login with unregistered or incorrect credentials | Error pops up with "Action Failed" message |
+| TC-04 | **Persistence** | Click "Favorite" on a recipe | Recipe ID and metadata are saved to the DB for that specific user. |
+| TC-05 | **Security** | Access `/favorites` while logged out | App prompts to login. |
+| TC-06 | **Responsive** | Resize browser to 375px (Mobile) | Layout shifts to a single column; text remains readable. |
+| TC-07 | **Logout** | Click "Logout" button | JWT is cleared; "Favorites" state is reset to empty. |
