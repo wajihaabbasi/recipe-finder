@@ -38,19 +38,19 @@ To ensure a balance between accessibility and security, the application follows 
 ### 2. Database Setup
 Create a database named `recipe_app` and execute the following to set up the schema:
 ```sql
-CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    username VARCHAR(255) UNIQUE NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    password TEXT NOT NULL
+CREATE TABLE IF NOT EXISTS users (
+    user_id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(255) UNIQUE,
+    password_hash VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE favorites (
-    id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-    recipe_id INTEGER NOT NULL,
-    recipe_title VARCHAR(255),
-    recipe_image TEXT
+    favorites_id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+    spoonacular_id INTEGER NOT NULL,
+    saved_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (user_id, spoonacular_id)
 );
 
 ```
